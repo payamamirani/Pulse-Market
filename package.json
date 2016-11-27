@@ -2,9 +2,9 @@
   "name": "parts-genunie",
   "version": "1.0.0",
   "description": "Website for salese heavy machine parts.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "payam amirani <p.amirani@gmail.com>",
   "license": "ISC",

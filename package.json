@@ -6,10 +6,19 @@
   "scripts": {
     "start": "nodemon server.js"
   },
+  "engines":{
+    "node":"5.7.x",
+    "npm":"4.0.x"
+  },
   "author": "payam amirani <p.amirani@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "mongoose": "^4.7.0",
+    "morgan": "^1.7.0",
+    "stylus": "^0.54.5"
   }
 }

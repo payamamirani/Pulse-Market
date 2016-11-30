@@ -1,6 +1,5 @@
-doctype html5
-html
-    head
-        title
-    body
-        h1 Hello World!
+extends  ../includes/layout
+block main-content
+    section.content
+        div(ng-view)
+        h1= mongoMessage

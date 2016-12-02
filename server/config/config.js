@@ -18,4 +18,4 @@ module.exports = {
         db: "mongodb://appuser:multivision123@ds027145.mlab.com:27145/multivision" ,
         port: process.env.PORT || 8000
     }
-}
+};

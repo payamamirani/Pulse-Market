@@ -6,9 +6,9 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "engines":{
-    "node":"5.7.x",
-    "npm":"4.0.x"
+  "engines": {
+    "node": "5.7.x",
+    "npm": "4.0.x"
   },
   "author": "payam amirani <p.amirani@gmail.com>",
   "license": "ISC",
@@ -16,9 +16,12 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "jade": "^1.11.0",
     "mongoose": "^4.7.0",
     "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "stylus": "^0.54.5"
   }
 }

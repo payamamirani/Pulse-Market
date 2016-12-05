@@ -6,7 +6,7 @@ angular.module('app').factory('mvNotifier', function(mvToastr) {
         "debug": false,
         "newestOnTop": true,
         "progressBar": true,
-        "positionClass": "toast-top-right",
+        "positionClass": "toast-top-left",
         "preventDuplicates": true,
         "onclick": null,
         "showDuration": "300",

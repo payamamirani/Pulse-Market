@@ -8,7 +8,8 @@ module.exports = function () {
         LastName: String,
         Username: String,
         Salt: String,
-        HashPassword: String
+        HashPassword: String,
+        Roles: [String]
     });
 
     UserShcema.methods = {

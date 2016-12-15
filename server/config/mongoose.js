@@ -5,9 +5,9 @@ var mongoose = require('mongoose'),
 module.exports = function(config) {
     mongoose.connect(config.db);
     var db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error ...'));
+    db.on('error', console.error.bind(console, 'Connecting to database error ...'));
     db.once('open', function callback(){
-        console.log('multivision db opened.');
+        console.log('PlusMarket db opened.');
     });
     UserModel.createDefaultUsers();
 };

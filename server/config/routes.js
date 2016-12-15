@@ -20,6 +20,7 @@ module.exports = function(app) {
         req.logout();
         res.end();
     });
+
     app.get('*', function (req, res) {
         res.render('index', {
             bootstrappedUser: req.user

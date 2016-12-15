@@ -10,7 +10,7 @@ module.exports = {
         rootPath: rootPath ,
         publicPath: publicPath ,
         viewPath: viewPath ,
-        db: "mongodb://localhost/multivision" ,
+        db: "mongodb://localhost/PlusMarket" ,
         port: process.env.PORT || 3000
     },
     production: {

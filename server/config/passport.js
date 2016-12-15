@@ -1,12 +1,14 @@
 
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    User = require('../data/models/User');
+    UserModel = require('mongoose').model('User');
 
 module.exports = function () {
     passport.use(new LocalStrategy(function (username, password, done) {
-        User.findOne({Username: username}).exec(function(err, user) {
-            if(user && user.authenticate(password)) {
+        UserModel.findOne({Username: username}).exec(function(err, user) {
+            if(err) {
+                return done(err, false);
+            } else if(user && user.authenticate(password)) {
                 return done(null, user);
             } else {
                 return done(null, false);
@@ -21,8 +23,10 @@ module.exports = function () {
     });
 
     passport.deserializeUser(function(id, done) {
-        User.find({_id: id}).exec(function(err, user) {
-            if(user) {
+        UserModel.find({_id: id}).exec(function(err, user) {
+            if(err) {
+                return done(err, false);
+            } else if(user) {
                 return done(null, user);
             } else {
                 return done(null, false);

@@ -1,8 +1,10 @@
 
 var path = require('path');
+
 var rootPath = path.normalize(path.join(__dirname, '../..'));
 var publicPath = path.normalize(path.join(rootPath, 'public'));
 var viewPath = path.normalize(path.join(rootPath, 'server/views'));
+
 module.exports = {
     development: {
         rootPath: rootPath ,

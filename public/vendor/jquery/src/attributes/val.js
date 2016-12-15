@@ -28,7 +28,7 @@ jQuery.fn.extend( {
 
 				return typeof ret === "string" ?
 
-					// Handle most common string cases
+					// Handle most utilities string cases
 					ret.replace( rreturn, "" ) :
 
 					// Handle cases where value is null/undef or number

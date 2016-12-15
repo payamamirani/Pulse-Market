@@ -27,4 +27,4 @@ module.exports = function(app, config) {
         compile: compile
     }));
     app.use(express.static(config.publicPath));
-}
+};

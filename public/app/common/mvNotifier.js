@@ -26,7 +26,7 @@ angular.module('app').factory('mvNotifier', function(mvToastr) {
             case 'e': mvToastr.error(msg, title); break;
         }
         console.log(msg);
-    }
+    };
     return {
         successNotify: function(title, msg) {
             notify('s', title, msg);

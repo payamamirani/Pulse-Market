@@ -1,11 +1,11 @@
 
 var auth = require('./auth'),
-    User = require('../data/models/User');
+    UserModel = require('mongoose').model('User');
 
 module.exports = function(app) {
 
     app.get('/api/users', auth.requireRole('admin'), function (req, res) {
-        User.find({}).exec(function (err, users) {
+        UserModel.find({}).exec(function (err, users) {
             res.send(users);
         });
     });
@@ -25,4 +25,4 @@ module.exports = function(app) {
             bootstrappedUser: req.user
         });
     });
-}
+};

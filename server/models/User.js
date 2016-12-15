@@ -2,7 +2,7 @@
 var mongoose = require('mongoose'),
     encryption = require('../utilities/encryption');
 
-var UserShcema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
     FirstName: String,
     LastName: String,
     Username: String,
@@ -11,7 +11,7 @@ var UserShcema = mongoose.Schema({
     Roles: [String]
 });
 
-UserShcema.methods = {
+UserSchema.methods = {
     authenticate: function (passwordToMatch) {
         return encryption.hashPassword(this.Salt, passwordToMatch) === this.HashPassword;
     }

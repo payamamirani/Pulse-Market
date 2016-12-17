@@ -2,12 +2,13 @@
 var mongoose = require('mongoose'),
     encryption = require('../utilities/encryption');
 
+var requiredMsg = '{PATH} is required.';
 var UserSchema = mongoose.Schema({
-    FirstName: String,
-    LastName: String,
-    Username: String,
-    Salt: String,
-    HashPassword: String,
+    FirstName: {type: String, required: requiredMsg },
+    LastName: {type: String, required: requiredMsg },
+    Username: {type: String, required: requiredMsg, unique: true },
+    Salt: {type: String, required: requiredMsg },
+    HashPassword: {type: String, required: requiredMsg },
     Roles: [String]
 });
 

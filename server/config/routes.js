@@ -6,6 +6,8 @@ module.exports = function(app) {
 
     app.get('/api/users', auth.requireRole('admin'), userController.getAllUsers);
     app.post('/api/users', userController.createUser);
+    app.put('/api/users', userController.updateUser);
+
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/' + req.params[0]);
     });

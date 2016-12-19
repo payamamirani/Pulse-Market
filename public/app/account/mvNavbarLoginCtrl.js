@@ -2,8 +2,12 @@ angular.module('app').controller('mvNavbarLoginCtrl', function ($scope, mvNotifi
    $scope.identity = mvIdentity;
    $scope.signin = function (username, password) {
        mvAuth.authenticateUser(username, password).then(function (success) {
-           if(success) mvNotifier.successNotify('success', 'logged in!');
-           else        mvNotifier.errorNotify('error', 'failed to log in!');
+           if(success) {
+               mvNotifier.successNotify('success', 'logged in!');
+               $location.path('/');
+           } else {
+               mvNotifier.errorNotify('error', 'failed to log in!');
+           }
        });
    };
    $scope.logout = function () {

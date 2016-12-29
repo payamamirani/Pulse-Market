@@ -1,8 +1,13 @@
 
 var auth = require('./auth'),
-    userController = require('../controllers/users');
+    userController = require('../controllers/users'),
+    categoriesController = require('../controllers/categories');
 
 module.exports = function(app) {
+
+    app.get('/api/Categories', auth.requireRole('admin'), categoriesController.getAllCategories);
+    app.post('/api/Categories', auth.requireRole('admin'), categoriesController.createCategories);
+    app.put('/api/Categories', auth.requireRole('admin'), categoriesController.updateCategories);
 
     app.get('/api/users', auth.requireRole('admin'), userController.getAllUsers);
     app.post('/api/users', userController.createUser);

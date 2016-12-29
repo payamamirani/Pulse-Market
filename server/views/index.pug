@@ -1,0 +1,26 @@
+extends  ../includes/layout
+block main-content
+    .navbar.navbar-default.navbar-fixed-top
+        .container
+            .navbar-header
+                button.navbar-toggle(type="button", data-toggle="collapse", data-target="#myNavbar")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href="/")= !!texts ? texts.AppName : "Pulse Market"
+                    h6= !!texts ? texts.AppDescription : "- Pulse Market"
+            .navbar-collapse.collapse#myNavbar
+                ul.nav.navbar-nav
+                    li
+                        a(href="/")= !!texts ? texts.Home : "Home"
+                div(ng-include="'/partials/account/navbar-login'")
+    section.content
+        div(ng-view)
+
+    ul
+        li
+            a(href="/?clang=fa")= !!texts ? texts.Persian : "Persian"
+        li
+            a(href="/?clang=en")= !!texts ? texts.English : "English"
+    footer.container.text-center
+        p &copy; 2016 Parts Genuine

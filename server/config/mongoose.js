@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose'),
-    UserModel = require('../models/User');
+    UserModel = require('../models/User'),
+    CategoryModel = require('../models/Category');
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -10,4 +11,5 @@ module.exports = function(config) {
         console.log('PlusMarket db opened.');
     });
     UserModel.createDefaultUsers();
+    CategoryModel.createDefaultCategories();
 };

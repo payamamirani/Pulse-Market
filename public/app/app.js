@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ngRoute']);
+angular.module('app', ['ngResource', 'ngRoute', 'ui.tree']);
 
 angular.module('app').config(function($routeProvider, $locationProvider) {
     var routeRoleCheck = {
@@ -23,6 +23,8 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', { templateUrl: '/partials/main/main', controller: 'mvMainCtrl'})
         .when('/admin/users' , { templateUrl: '/partials/admin/user-list' , controller: 'mvUserListCtrl',
+            resolve: routeRoleCheck.admin })
+        .when('/admin/category', { templateUrl: '/partials/admin/category/category', controller: 'mvCategoryCtrl',
             resolve: routeRoleCheck.admin })
         .when('/signup', { templateUrl: '/partials/account/signup', controller: 'mvSignupCtrl',
             resolve: routeRoleCheck.nouser })

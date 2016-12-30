@@ -1,0 +1,19 @@
+.well.col-xs-12.col-sm-12.col-md-8.col-lg-6.text-center.div-center
+    form.form-horizontal(name="loginForm")
+        fieldset
+            legend
+                p.glyphicon.glyphicon-lock
+                p= !!texts ? texts.LoginHeader : "Login to pulse market"
+            .form-group
+                label.col-md-3.control-label(for="email")= (!!texts ? texts.Email : "Email") + " : "
+                .col-md-9
+                    input.form-control(name="email", type="email", placeholder= !!texts ? texts.Email : "Email", ng-model="username", required)
+            .form-group
+                label.col-md-3.control-label(for="password")= (!!texts ? texts.Password : "Password") + " : "
+                .col-md-9
+                    input.form-control(name="password", type="password", placeholder= !!texts ? texts.Password : "password", ng-model="password", required)
+            .form-group
+                .col-md-12.pull-left
+                    button.btn.btn-success(ng-click="signin(username, password)", ng-disabled="loginForm.$invalid")= !!texts ? texts.Login : "Login"
+                    | &nbsp;
+                    a.btn.btn-default(href="/")= !!texts ? texts.Cancel : "Cancel"

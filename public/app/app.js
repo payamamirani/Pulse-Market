@@ -22,12 +22,14 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', { templateUrl: '/partials/main/main', controller: 'mvMainCtrl'})
+        .when('/signup', { templateUrl: '/partials/account/signup', controller: 'mvSignupCtrl',
+            resolve: routeRoleCheck.nouser })
+        .when('/signin', { templateUrl: '/partials/account/signin', controller: 'mvLoginCtrl',
+            resolve: routeRoleCheck.nouser })
         .when('/admin/users' , { templateUrl: '/partials/admin/user-list' , controller: 'mvUserListCtrl',
             resolve: routeRoleCheck.admin })
         .when('/admin/category', { templateUrl: '/partials/admin/category/category', controller: 'mvCategoryCtrl',
             resolve: routeRoleCheck.admin })
-        .when('/signup', { templateUrl: '/partials/account/signup', controller: 'mvSignupCtrl',
-            resolve: routeRoleCheck.nouser })
         .when('/profile', { templateUrl: '/partials/account/profile', controller: 'mvProfileCtrl',
             resolve: routeRoleCheck.user });
 });

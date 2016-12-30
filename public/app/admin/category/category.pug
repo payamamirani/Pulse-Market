@@ -1,17 +1,15 @@
-.container
-    script(type="text/ng-template", id="nodes_render.html")
-        .tree-node
-            .pull-left.tree-handle(ui-tree-handle)
-                span.glyphicon.glyphicon-list
-            .tree-node-content
-                a.btn.btn-success.btn-xs.btn-small(data-nodrag, ng-click="toggle(this)" ng-if="node.Child && node.Child.length > 0")
-                    span.glyphicon(ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}")
-                span.name {{ node.Title }}
-        ol(ui-tree-nodes="", ng-model="node.Child", ng-class="{hidden: collapsed}")
-            li(ng-repeat="node in node.Child", ui-tree-node, ng-include="'nodes_render.html'")
-
-    .row
-        .col-sm-6
-            .angular-ui-tree(ui-tree)
-                ol.angular-ui-tree-nodes#tree-root( ui-tree-nodes, ng-model="categories")
-                    li.angular-ui-tree-node(ng-repeat="node in categories", ui-tree-node, ng-include="'nodes_render.html'")
+script(type="text/ng-template", id="nodes_render.html")
+    .tree-node
+        .pull-left.tree-handle(ui-tree-handle)
+            span.glyphicon.glyphicon-list
+        .tree-node-content
+            a.btn.btn-success.btn-xs.btn-small(data-nodrag, ng-click="toggle(this)" ng-if="node.Child && node.Child.length > 0")
+                span.glyphicon(ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}")
+            span.name {{ node.Title }}
+    ol(ui-tree-nodes="", ng-model="node.Child", ng-class="{hidden: collapsed}")
+        li(ng-repeat="node in node.Child", ui-tree-node, ng-include="'nodes_render.html'")
+.row
+    .col-sm-6
+        .angular-ui-tree(ui-tree)
+            ol.angular-ui-tree-nodes#tree-root( ui-tree-nodes, ng-model="categories")
+                li.angular-ui-tree-node(ng-repeat="node in categories", ui-tree-node, ng-include="'nodes_render.html'")

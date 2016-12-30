@@ -4,5 +4,11 @@
   "Home": "خانه",
   "SelectYourLanguage": "زبان مورد نظر خود را انتخاب کنید :",
   "English": "انگلیسی",
-  "Persian": "فارسی"
+  "Persian": "فارسی",
+  "Login": "ورود",
+  "Signup": "ثبت نام",
+  "LoginHeader": "ورود به پنل",
+  "Email": "پست الکترونیک",
+  "Password": "کلمه عبور",
+  "Cancel": "انصراف"
 }

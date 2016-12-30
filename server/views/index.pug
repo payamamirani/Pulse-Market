@@ -10,17 +10,9 @@ block main-content
                 a.navbar-brand(href="/")= !!texts ? texts.AppName : "Pulse Market"
                     h6= !!texts ? texts.AppDescription : "- Pulse Market"
             .navbar-collapse.collapse#myNavbar
-                ul.nav.navbar-nav
-                    li
-                        a(href="/")= !!texts ? texts.Home : "Home"
                 div(ng-include="'/partials/account/navbar-login'")
     section.content
-        div(ng-view)
+        .container(ng-view)
 
-    ul
-        li
-            a(href="/?clang=fa")= !!texts ? texts.Persian : "Persian"
-        li
-            a(href="/?clang=en")= !!texts ? texts.English : "English"
     footer.container.text-center
-        p &copy; 2016 Parts Genuine
+        p Copyright &copy; 2016 Parts Genuine

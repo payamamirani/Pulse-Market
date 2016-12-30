@@ -3,10 +3,10 @@
   src: url("../fonts/GanjNamehSans-Regular.otf") format('otf'), url("../fonts/GanjNamehSans-Regular.woff") format('woff'), url("../fonts/GanjNamehSans-Regular.woff2") format('woff2'), url("../fonts/GanjNamehSans-Regular.ttf") format('truetype');
 }
 * {
-  font-family: 'GanjNamehSans', "B Yekan", "Arial", "Tahoma", "Time new Romance" !important;
+  font-family: 'GanjNamehSans', 'B Yekan', 'Arial', 'Tahoma', 'Time new Romance';
 }
 body {
-  padding-top: 61px;
+  padding-top: 55px;
 }
 .navbar-header a.navbar-brand {
   margin-top: -12px;
@@ -66,4 +66,9 @@ tr.angular-ui-tree-empty {
 }
 .tree-node-content {
   margin: 7px;
+}
+.div-center {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
 }

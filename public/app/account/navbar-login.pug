@@ -1,14 +1,10 @@
-.navbar-right(ng-controller="mvNavbarLoginCtrl")
-    form.navbar-form(ng-hide="identity.isAuthenticated()")
-        ul.nav.navbar-nav
-            li
-                a(href="/signup") Sign up
-        .form-group
-            input.form-control(placeholder="Email", ng-model="username")
-        .form-group
-            input.form-control(type="password", placeholder="Password", ng-model="password")
-        button.btn.btn-primary(ng-click="signin(username, password)") Sign In
-    ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
+.navbar-left(ng-controller="mvNavbarCtrl")
+    ul.nav.navbar-nav.navbar-left(ng-hide="identity.isAuthenticated()")
+        li
+            a(href="/signin")= !!texts ? texts.Login : "Log in"
+        li
+            a(href="/signup")= !!texts ? texts.Signup : "Sign up"
+    ul.nav.navbar-nav.navbar-left(ng-show="identity.isAuthenticated()")
         li.dropdown
             a.dropdown-toggle(href="", data-toggle="dropdown")
                 | {{ identity.currentUser.FirstName + " " + identity.currentUser.LastName }}

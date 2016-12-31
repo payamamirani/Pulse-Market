@@ -8,7 +8,7 @@ var express = require('express'),
     passport = require('passport'),
     mongoose = require('mongoose'),
     MongoStore = require('connect-mongo')(session),
-    //geolang = require("geolang-express"),
+    geolang = require("geolang-express"),
     i18n = require('i18n-express');
 
 module.exports = function(app, config) {
@@ -38,15 +38,14 @@ module.exports = function(app, config) {
         src: config.publicPath,
         compile: compile
     }));
-    /*app.use(geolang({
-     siteLangs: ["fa","en"],
-     cookieLangName: 'ulang'
-     }));*/
+    app.use(geolang({
+        siteLangs: ["fa","en"],
+        defaultCountry: "IR"
+    }));
     app.use(i18n({
-        translationsPath: config.localesPath,
-        defaultLang: "fa",
         siteLangs: ["fa", "en"],
-        cookieLangName: 'ulang'
+        translationsPath: config.localesPath,
+        defaultLang: "fa"
     }));
     app.use(express.static(config.publicPath));
 };

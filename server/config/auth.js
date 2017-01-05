@@ -7,6 +7,7 @@ exports.authenticate = function(req, res, next) {
         if(!user) res.send({ success: false });
         req.logIn(user, function(err) {
             if(err) return next(err);
+            req.session.cookie.expires = !!req.body.remember ? 365 * 24 * 60 * 60 * 1000 : false;
             res.send({success: true, user: user});
         });
     });

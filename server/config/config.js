@@ -12,7 +12,7 @@ module.exports = {
         publicPath: publicPath ,
         viewPath: viewPath ,
         localesPath: localesPath,
-        db: "mongodb://localhost/PlusMarket" ,
+        db: "mongodb://localhost/PulseMarket" ,
         port: process.env.PORT || 3000
     },
     production: {

@@ -8,7 +8,7 @@ module.exports = function(config) {
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Connecting to database error ...'));
     db.once('open', function callback(){
-        console.log('PlusMarket db opened.');
+        console.log('Pulse Market db opened.');
     });
     UserModel.createDefaultUsers();
     CategoryModel.createDefaultCategories();

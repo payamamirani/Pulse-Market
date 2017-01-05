@@ -11,7 +11,6 @@ angular.module('app').controller('mvSignupCtrl', function($scope,mvAuth,mvNotifi
             mvNotifier.successNotify("Success", "User account created!");
             $location.path("/");
         }, function(reason) {
-            debugger;
             mvNotifier.errorNotify("Error", reason);
         });
     }

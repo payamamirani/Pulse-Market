@@ -1,6 +1,6 @@
 angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, mvNotifier, $location) {
-    $scope.signin = function (username, password) {
-        mvAuth.authenticateUser(username, password).then(function (success) {
+    $scope.signin = function (username, password, remember) {
+        mvAuth.authenticateUser(username, password, remember).then(function (success) {
             if(success) {
                 mvNotifier.successNotify('success', 'logged in!');
                 $location.path('/');

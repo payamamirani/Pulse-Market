@@ -6,9 +6,11 @@ var requiredMsg = '{PATH} is required.';
 var UserSchema = mongoose.Schema({
     FirstName: {type: String, required: requiredMsg },
     LastName: {type: String, required: requiredMsg },
-    Username: {type: String, required: requiredMsg, unique: true },
+    Username: {type: String, required: requiredMsg, unique: true, lowercase: true },
     Salt: {type: String, required: requiredMsg },
     HashPassword: {type: String, required: requiredMsg },
+    Token: String,
+    TokenExpireDate: {type: Date},
     Roles: [String]
 });
 
@@ -28,14 +30,14 @@ function createDefaultUsers() {
         if (!user) {
             var salt, pass;
             salt = encryption.createSalt();
-            pass = encryption.hashPassword(salt, "payam");
-            User.create({ FirstName: "payam", LastName: "amirani", Username: "payam", Salt: salt, HashPassword: pass, Roles: ['admin'] });
+            pass = encryption.hashPassword(salt, "123");
+            User.create({ FirstName: "پیام", LastName: "امیرانی", Username: "pm.amirani@gmail.com", Salt: salt, HashPassword: pass, Roles: ['admin'] });
             salt = encryption.createSalt();
-            pass = encryption.hashPassword(salt, "ali");
-            User.create({ FirstName: "ali", LastName: "amirani", Username: "ali", Salt: salt, HashPassword: pass, Roles: [] });
+            pass = encryption.hashPassword(salt, "123");
+            User.create({ FirstName: "علی", LastName: "امیرانی", Username: "ali@gmail.com", Salt: salt, HashPassword: pass, Roles: [] });
             salt = encryption.createSalt();
-            pass = encryption.hashPassword(salt, "yasaman");
-            User.create({ FirstName: "yasaman", LastName: "amirani", Username: "yasaman", Salt: salt, HashPassword: pass });
+            pass = encryption.hashPassword(salt, "123");
+            User.create({ FirstName: "یاسمن", LastName: "امیرانی", Username: "yasaman@gmail.com", Salt: salt, HashPassword: pass });
         }
     });
 }

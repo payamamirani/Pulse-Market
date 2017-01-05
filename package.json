@@ -1,10 +1,11 @@
 {
-  "name": "plus-market",
+  "name": "pulse-market",
   "version": "1.0.0",
   "description": "Website for salese heavy machine parts.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "node-debug server.js"
   },
   "engines": {
     "node": "5.7.x",
@@ -25,6 +26,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta6",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "svg-captcha": "^1.2.1"
   }
 }

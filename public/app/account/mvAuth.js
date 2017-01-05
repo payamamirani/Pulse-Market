@@ -1,8 +1,8 @@
-angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) {
+angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, mvCaptcha) {
     return {
-        authenticateUser: function (username, password) {
+        authenticateUser: function (username, password, remember) {
             var dfd = $q.defer();
-            $http.post('/login', {username: username, password: password}).then(function(response) {
+            $http.post('/login', {username: username, password: password, remember: remember}).then(function(response) {
                 if(response.data.success) {
                     var user = new mvUser();
                     angular.extend(user, response.data.user);
@@ -62,6 +62,18 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
             }, function(response) {
                 dfd.reject(response.data.reason);
             });
+            return dfd.promise;
+        },
+        resetPassword: function(username, captcha) {
+            var dfd = $q.defer();
+            $http.post('/api/resetPassword', {username: username, captcha: captcha}).then(function(response) {
+                if(response.data.success) {
+                    dfd.resolve(true);
+                } else {
+                    dfd.reject(response.data.error);
+                }
+            });
+            mvCaptcha.refreshCaptcha();
             return dfd.promise;
         }
     };

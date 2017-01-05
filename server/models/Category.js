@@ -12,7 +12,6 @@ CategorySchema.add({
 var Category = mongoose.model('Category', CategorySchema);
 
 function createDefaultCategories() {
-    debugger;
     Category.findOne({}).exec(function(err, category) {
         if(err) console.log(err);
         if(!category) {

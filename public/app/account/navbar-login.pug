@@ -3,7 +3,7 @@
         li
             a(href="/signin")= !!texts ? texts.Login : "Log in"
         li
-            a(href="/signup")= !!texts ? texts.Signup : "Sign up"
+            a(href="/signup")= !!texts ? texts.SignUp : "Sign up"
     ul.nav.navbar-nav.navbar-left(ng-show="identity.isAuthenticated()")
         li.dropdown
             a.dropdown-toggle(href="", data-toggle="dropdown")

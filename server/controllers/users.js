@@ -1,6 +1,7 @@
 
 var UserModel = require('mongoose').model('User'),
-    encryption = require('../utilities/encryption');
+    encryption = require('../utilities/encryption'),
+    mail = require('../config/mail');
 
 exports.getAllUsers = function (req, res) {
     UserModel.find({}).exec(function (err, users) {
@@ -32,7 +33,6 @@ exports.createUser = function(req, res, next) {
 
 exports.updateUser = function (req, res) {
     var userUpdates = req.body;
-    debugger;
     if(req.user[0]._id != userUpdates._id) {
         res.status(403);
         return res.end();
@@ -49,4 +49,26 @@ exports.updateUser = function (req, res) {
         if(err) { res.status(400); return res.send({ reason:err.toString() }); }
         res.send(req.user[0]);
     })
+};
+
+exports.resetPassword = function(req, res) {
+    var data = req.body;
+    if(data.captcha.toLowerCase() !== req.session.captcha)
+        return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
+
+    data.username = data.username.toLowerCase();
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() + 2);
+    var query = { Username: data.username };
+    var update = { Token: encryption.createSalt(), TokenExpireDate: expireDate };
+    var options = { new: true };
+
+    UserModel.findOneAndUpdate(query, update, options, function(err, user) {
+        if (err) return res.send({success: false, error: err.toString()});
+        if (!user) return res.send({success: false, error: req.i18n_texts.UsernameNotFound});
+        mail.SendMail(user.Username, req.i18n_texts.ResetPasswordEmailSubject, "resetPassword", function (err) {
+            if (err) return res.send({success: false, error: err.toString()});
+            return res.send({success: true});
+        });
+    });
 };

@@ -1,7 +1,9 @@
 
 var UserModel = require('mongoose').model('User'),
     encryption = require('../utilities/encryption'),
-    mail = require('../config/mail');
+    mail = require('../config/mail'),
+    jDate = require('jdate').JDate(),
+    querystring = require("querystring");
 
 exports.getAllUsers = function (req, res) {
     UserModel.find({}).exec(function (err, users) {
@@ -51,7 +53,7 @@ exports.updateUser = function (req, res) {
     })
 };
 
-exports.resetPassword = function(req, res) {
+exports.forgotPassword = function(req, res) {
     var data = req.body;
     if(data.captcha.toLowerCase() !== req.session.captcha)
         return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
@@ -66,9 +68,63 @@ exports.resetPassword = function(req, res) {
     UserModel.findOneAndUpdate(query, update, options, function(err, user) {
         if (err) return res.send({success: false, error: err.toString()});
         if (!user) return res.send({success: false, error: req.i18n_texts.UsernameNotFound});
-        mail.SendMail(user.Username, req.i18n_texts.ResetPasswordEmailSubject, "resetPassword", function (err) {
+        var date =  req.i18n_lang == "fa" ? jDate.toString('yyyy/MM/dd HH:mm:ss') : new Date().toLocaleString();
+        var url = req.protocol + "://" + req.get('host') + "/resetpassword?u=" + user.Username + "&t=" + querystring.escape(user.Token);
+        res.render('templates/forgotPassword', {Username: user.Username, Url: url, Date: date }, function(err, result) {
             if (err) return res.send({success: false, error: err.toString()});
-            return res.send({success: true});
+            mail.SendMail(user.Username, req.i18n_texts.ResetPasswordEmailSubject, result, function (err) {
+                if (err) return res.send({success: false, error: err.toString()});
+                return res.send({success: true});
+            });
         });
     });
+};
+
+exports.resetPassword = function(req, res) {
+    try{
+        var data = req.body;
+        if(data.captcha.toLowerCase() !== req.session.captcha)
+            return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
+
+        if(data.password != data.confirmPassword)
+            return res.send({success: false, error: req.i18n_texts.PasswordNotEqualWithConfirmPassword});
+
+        data.username = data.username.toLowerCase();
+
+        UserModel.findOne({ Username: data.username }, function(err, user) {
+            if (err) return res.send({success: false, error: err.toString()});
+            if (!user) return res.send({success: false, error: req.i18n_texts.UsernameNotFound});
+            if (!(user.Token || user.TokenExpireDate)) return res.send({
+                success: false,
+                error: req.i18n_texts.UserTokenNotFound
+            });
+            if (user.TokenExpireDate - new Date() <= 0) return res.send({
+                success: false,
+                error: req.i18n_texts.UserTokenIsExpired
+            });
+            if (user.Token != data.token) return res.send({
+                success: false,
+                error: req.i18n_texts.TokenIsInvalid
+            });
+
+            user.Token = null;
+            user.TokenExpireDate = null;
+            user.Salt = encryption.createSalt();
+            user.HashPassword = encryption.hashPassword(user.Salt, data.password);
+            user.save(function(err) {
+                if(err) return res.send({success: false, error: err.toString()});
+                var date =  req.i18n_lang == "fa" ? jDate.toString('yyyy/MM/dd HH:mm:ss') : new Date().toLocaleString();
+                var url = req.protocol + "://" + req.get('host') + "/signin";
+                res.render('templates/successChangePassword', {Username: user.Username, Url: url, Date: date }, function(err, result) {
+                    if (err) return res.send({success: false, error: err.toString()});
+                    mail.SendMail(user.Username, req.i18n_texts.SuccessChangePasswordEmailSubject, result, function (err) {
+                        if (err) return res.send({success: false, error: err.toString()});
+                    });
+                });
+                return res.send({success: true});
+            });
+        });
+    } catch(err) {
+        return res.send({success: false, error: err.toString()});
+    }
 };

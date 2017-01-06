@@ -28,6 +28,8 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
             resolve: routeRoleCheck.nouser })
         .when('/forgotpassword', { templateUrl: '/partials/account/forgotpassword', controller: 'mvForgotPasswordCtrl',
             resolve: routeRoleCheck.nouser })
+        .when('/resetpassword', {templateUrl: '/partials/account/resetpassword', controller: 'mvResetPasswordCtrl',
+            resolve: routeRoleCheck.nouser })
         .when('/admin/users' , { templateUrl: '/partials/admin/user-list' , controller: 'mvUserListCtrl',
             resolve: routeRoleCheck.admin })
         .when('/admin/category', { templateUrl: '/partials/admin/category/category', controller: 'mvCategoryCtrl',

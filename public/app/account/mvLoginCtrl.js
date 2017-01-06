@@ -1,12 +1,14 @@
-angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, mvNotifier, $location) {
-    $scope.signin = function (username, password, remember) {
-        mvAuth.authenticateUser(username, password, remember).then(function (success) {
-            if(success) {
-                mvNotifier.successNotify('success', 'logged in!');
-                $location.path('/');
-            } else {
-                mvNotifier.errorNotify('error', 'failed to log in!');
-            }
+angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, mvNotifier, $location, mvCaptcha) {
+    $scope.refreshCaptcha = mvCaptcha.refreshCaptcha;
+    $scope.refreshCaptcha();
+    $scope.signin = function () {
+        mvAuth.authenticateUser($scope.username, $scope.password, $scope.remember, $scope.captcha).then(function () {
+            $scope.refreshCaptcha();
+            mvNotifier.successNotify(texts.SuccessAction, 'logged in!');
+            $location.path('/');
+        } , function(error) {
+            $scope.refreshCaptcha();
+            mvNotifier.errorNotify(texts.ErrorAction, !!error ? error : 'failed to log in!');
         });
     };
 });

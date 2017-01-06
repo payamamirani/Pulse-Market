@@ -1,4 +1,6 @@
-angular.module('app').controller('mvSignupCtrl', function($scope,mvAuth,mvNotifier,$location) {
+angular.module('app').controller('mvSignupCtrl', function($scope, mvAuth, mvNotifier, $location, mvCaptcha) {
+    $scope.refreshCaptcha = mvCaptcha.refreshCaptcha;
+    $scope.refreshCaptcha();
     $scope.signup = function () {
         var newUserData = {
             Username: $scope.email,
@@ -8,10 +10,12 @@ angular.module('app').controller('mvSignupCtrl', function($scope,mvAuth,mvNotifi
         };
 
         mvAuth.createUser(newUserData).then(function() {
-            mvNotifier.successNotify("Success", "User account created!");
+            $scope.refreshCaptcha();
+            mvNotifier.successNotify(texts.SuccessAction, "User account created!");
             $location.path("/");
-        }, function(reason) {
-            mvNotifier.errorNotify("Error", reason);
+        }, function(error) {
+            $scope.refreshCaptcha();
+            mvNotifier.errorNotify(texts.ErrorAction, !!error ? error : texts.ErrorResetPassword);
         });
     }
 });

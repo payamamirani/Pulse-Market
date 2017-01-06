@@ -1,15 +1,15 @@
-angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, mvCaptcha) {
+angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) {
     return {
-        authenticateUser: function (username, password, remember) {
+        authenticateUser: function (username, password, remember, captcha) {
             var dfd = $q.defer();
-            $http.post('/login', {username: username, password: password, remember: remember}).then(function(response) {
+            $http.post('/login', {username: username, password: password, remember: remember, captcha: captcha}).then(function(response) {
                 if(response.data.success) {
                     var user = new mvUser();
                     angular.extend(user, response.data.user);
                     mvIdentity.currentUser = user;
                     dfd.resolve(true);
                 } else {
-                    dfd.resolve(false);
+                    dfd.reject(response.data.error);
                 }
             });
             return dfd.promise;
@@ -64,16 +64,26 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, 
             });
             return dfd.promise;
         },
-        resetPassword: function(username, captcha) {
+        forgotPassword: function(username, captcha) {
             var dfd = $q.defer();
-            $http.post('/api/resetPassword', {username: username, captcha: captcha}).then(function(response) {
+            $http.post('/api/forgotPassword', {username: username, captcha: captcha}).then(function(response) {
                 if(response.data.success) {
                     dfd.resolve(true);
                 } else {
                     dfd.reject(response.data.error);
                 }
             });
-            mvCaptcha.refreshCaptcha();
+
+            return dfd.promise;
+        },
+        resetPassword: function(params) {
+            var dfd = $q.defer();
+            $http.post('/api/resetPassword', params).then(function(response) {
+                if(response.data.success)
+                    dfd.resolve(true);
+                else
+                    dfd.reject(response.data.error);
+            });
             return dfd.promise;
         }
     };

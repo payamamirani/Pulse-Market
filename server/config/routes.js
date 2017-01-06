@@ -13,6 +13,8 @@ module.exports = function(app) {
     app.get('/api/users', auth.requireRole('admin'), userController.getAllUsers);
     app.post('/api/users', userController.createUser);
     app.put('/api/users', userController.updateUser);
+
+    app.post('/api/forgotPassword', userController.forgotPassword);
     app.post('/api/resetPassword', userController.resetPassword);
 
     app.get('/partials/*', function (req, res) {
@@ -27,7 +29,13 @@ module.exports = function(app) {
     });
 
     app.get('/captcha', function(req, res) {
-        var captcha = svgCaptcha.create();
+        var captcha = svgCaptcha.create({
+            size: 5,
+            ignoreChars: '01iIloO',
+            color: true,
+            background: "#f5f5f5",
+            noise: 2
+        });
         req.session.captcha = captcha.text.toLowerCase();
 
         res.set('Content-Type', 'image/svg+xml');

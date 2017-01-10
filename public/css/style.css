@@ -83,3 +83,6 @@ tr.angular-ui-tree-empty {
   margin-right: auto;
   margin-left: auto;
 }
+.non-float {
+  float: none;
+}

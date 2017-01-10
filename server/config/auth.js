@@ -1,7 +1,9 @@
 
-var passport = require('passport');
+var passport = require('passport'),
+    captcha = require('./captcha');
+
 exports.authenticate = function(req, res, next) {
-    if(req.body.captcha.toLowerCase() !== req.session.captcha)
+    if(!captcha.isValidCaptcha(req, req.body.captcha))
         return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
 
     req.body.username = req.body.username.toLowerCase();

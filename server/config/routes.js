@@ -1,6 +1,6 @@
 
 var auth = require('./auth'),
-    svgCaptcha = require('svg-captcha'),
+    captcha = require('./captcha'),
     userController = require('../controllers/users'),
     categoriesController = require('../controllers/categories');
 
@@ -28,19 +28,7 @@ module.exports = function(app) {
         res.end();
     });
 
-    app.get('/captcha', function(req, res) {
-        var captcha = svgCaptcha.create({
-            size: 5,
-            ignoreChars: '01iIloO',
-            color: true,
-            background: "#f5f5f5",
-            noise: 2
-        });
-        req.session.captcha = captcha.text.toLowerCase();
-
-        res.set('Content-Type', 'image/svg+xml');
-        res.status(200).send(captcha.data);
-    });
+    app.get('/captcha', captcha.captcha);
 
     app.get('*', function (req, res) {
         res.render('index', {

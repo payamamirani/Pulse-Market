@@ -3,7 +3,8 @@ var UserModel = require('mongoose').model('User'),
     encryption = require('../utilities/encryption'),
     mail = require('../config/mail'),
     jDate = require('jdate').JDate(),
-    querystring = require("querystring");
+    queryString = require("querystring"),
+    captcha = require('../config/captcha');
 
 exports.getAllUsers = function (req, res) {
     UserModel.find({}).exec(function (err, users) {
@@ -55,7 +56,7 @@ exports.updateUser = function (req, res) {
 
 exports.forgotPassword = function(req, res) {
     var data = req.body;
-    if(data.captcha.toLowerCase() !== req.session.captcha)
+    if(!captcha.isValidCaptcha(req, data.captcha))
         return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
 
     data.username = data.username.toLowerCase();
@@ -69,7 +70,7 @@ exports.forgotPassword = function(req, res) {
         if (err) return res.send({success: false, error: err.toString()});
         if (!user) return res.send({success: false, error: req.i18n_texts.UsernameNotFound});
         var date =  req.i18n_lang == "fa" ? jDate.toString('yyyy/MM/dd HH:mm:ss') : new Date().toLocaleString();
-        var url = req.protocol + "://" + req.get('host') + "/resetpassword?u=" + user.Username + "&t=" + querystring.escape(user.Token);
+        var url = req.protocol + "://" + req.get('host') + "/resetpassword?u=" + user.Username + "&t=" + queryString.escape(user.Token);
         res.render('templates/forgotPassword', {Username: user.Username, Url: url, Date: date }, function(err, result) {
             if (err) return res.send({success: false, error: err.toString()});
             mail.SendMail(user.Username, req.i18n_texts.ResetPasswordEmailSubject, result, function (err) {
@@ -83,7 +84,7 @@ exports.forgotPassword = function(req, res) {
 exports.resetPassword = function(req, res) {
     try{
         var data = req.body;
-        if(data.captcha.toLowerCase() !== req.session.captcha)
+        if(!captcha.isValidCaptcha(req, data.captcha))
             return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
 
         if(data.password != data.confirmPassword)

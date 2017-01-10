@@ -5,6 +5,9 @@
         li
             a(href="/signup")= !!texts ? texts.SignUp : "Sign up"
     ul.nav.navbar-nav.navbar-left(ng-show="identity.isAuthenticated()")
+        li
+            a(href="", data-toggle="modal", data-target="#myPanel")
+                | {{ identity.currentUser.FirstName + " " + identity.currentUser.LastName }}
         li.dropdown
             a.dropdown-toggle(href="", data-toggle="dropdown")
                 | {{ identity.currentUser.FirstName + " " + identity.currentUser.LastName }}
@@ -15,6 +18,34 @@
                 li(ng-show="identity.currentUser.isAdmin()")
                     a(href="/admin/category") Category
                 li
-                    a(href="/profile") Profile
+                    a(href="/profile")= !!texts ? texts.Profile : "Profile"
                 li
-                    a(href="", ng-click="logout()") Sign Out
+                    a(href="", ng-click="logout()")= !!texts ? texts.SignOut : "SignOut"
+
+    .modal.fade#myPanel(role="profile")
+        .modal-dialog.col-xs-12.col-sm-8.div-center
+            .modal-content
+                .modal-header
+                    button.close(data-dismiss="modal") &times;
+                    h4 {{ identity.currentUser.FirstName + " " + identity.currentUser.LastName }}
+                .modal-body
+                    ul.nav.nav-tabs
+                        li.active
+                            a(href="", data-toggle="tab", data-target="#profile")= !!texts ? texts.Profile : "Profile"
+                        li
+                            a(href="", data-toggle="tab", data-target="#somtingElse") تست
+                    .tab-content
+                        .tab-pane.fade.in.active#profile
+                            .col-xs-12.col-sm-8.col-md-4.non-float
+                                h4= !!texts ? texts.Profile : "Profile"
+                                ul.nav.nav-pills.nav-stacked
+                                        li
+                                            a(href="/profile")= !!texts ? texts.Profile : "Profile"
+                                        li
+                                            a(href="/changePassword")= !!texts ? texts.ChangePassword : "ChangePassword"
+                                        li
+                                            a(href="", ng-click="logout()")= !!texts ? texts.SignOut : "SignOut"
+                        .tab-pane.fade#somtingElse
+                            h4 تست
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")= !!texts ? texts.Close : "Close"

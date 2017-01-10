@@ -45,5 +45,7 @@
   "PleaseClickThisLinkForLogin": "Please click this link for login to Pulse Market.",
   "SuccessChangedPassword": "Success changed password.",
   "SuccessChangePasswordEmailBody": "Dear user, Your password has changed successfully. Now you can login with username and new password.",
-  "":""
+  "Close": "Close",
+  "Profile": "Profile",
+  "SignOut": "Sign out"
 }

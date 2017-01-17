@@ -47,5 +47,8 @@
   "SuccessChangePasswordEmailBody": "Dear user, Your password has changed successfully. Now you can login with username and new password.",
   "Close": "Close",
   "Profile": "Profile",
-  "SignOut": "Sign out"
+  "SignOut": "Sign out",
+  "Change": "Change",
+  "CurrentPassword": "Current Password",
+  "CurrentPasswordIsIncorrect": "Current password is incorrect"
 }

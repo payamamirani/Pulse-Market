@@ -47,5 +47,8 @@
   "SuccessChangePasswordEmailBody": "کاربر گرامی، کلمه عبور شما با موفقیت تغییر پیدا کرده است و میتوانید با نام کاربری و کلمه عبور وارد سایت شوید.",
   "Close": "بستن",
   "Profile": "پروفایل",
-  "SignOut": "خروج"
+  "SignOut": "خروج",
+  "Change": "تغییر",
+  "CurrentPassword": "کلمه عبور فعلی",
+  "CurrentPasswordIsIncorrect": "کلمه عبور فعلی اشتباه است."
 }

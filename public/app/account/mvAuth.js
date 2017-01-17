@@ -56,11 +56,11 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
             var dfd = $q.defer();
             var clone = angular.copy(mvIdentity.currentUser);
             angular.extend(clone, newUserData);
-            clone.$update().then(function() {
-                mvIdentity.currentUser = clone;
-                dfd.resolve();
+            clone.$update().then(function(response) {
+                mvIdentity.currentUser = response.data;
+                dfd.resolve(response.data.success);
             }, function(response) {
-                dfd.reject(response.data.reason);
+                dfd.reject(response.data.error);
             });
             return dfd.promise;
         },

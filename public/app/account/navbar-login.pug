@@ -22,7 +22,7 @@
                 li
                     a(href="", ng-click="logout()")= !!texts ? texts.SignOut : "SignOut"
 
-    .modal.fade#myPanel(role="profile")
+    .modal.fade#myPanel(role="profile", ng-if="identity.isAuthenticated()")
         .modal-dialog.col-xs-12.col-sm-8.div-center
             .modal-content
                 .modal-header
@@ -36,13 +36,13 @@
                             a(href="", data-toggle="tab", data-target="#somtingElse") تست
                     .tab-content
                         .tab-pane.fade.in.active#profile
+                            h4= !!texts ? texts.Profile : "Profile"
                             .col-xs-12.col-sm-8.col-md-4.non-float
-                                h4= !!texts ? texts.Profile : "Profile"
                                 ul.nav.nav-pills.nav-stacked
                                         li
                                             a(href="/profile")= !!texts ? texts.Profile : "Profile"
                                         li
-                                            a(href="/changePassword")= !!texts ? texts.ChangePassword : "ChangePassword"
+                                            a(href="/changepassword")= !!texts ? texts.ChangePassword : "ChangePassword"
                                         li
                                             a(href="", ng-click="logout()")= !!texts ? texts.SignOut : "SignOut"
                         .tab-pane.fade#somtingElse

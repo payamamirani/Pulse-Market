@@ -41,17 +41,31 @@ exports.updateUser = function (req, res) {
         return res.end();
     }
 
+    if(!captcha.isValidCaptcha(req, userUpdates.captcha)) {
+        res.status(400);
+        return res.send({success: false, error: req.i18n_texts.InvalidSecurityCode});
+    }
+
     req.user[0].FirstName = userUpdates.FirstName;
     req.user[0].LastName = userUpdates.LastName;
     req.user[0].Username = userUpdates.Username;
-    if(userUpdates.Password && userUpdates.Password.length > 0){
+    if(userUpdates.Password && userUpdates.Password.length > 0) {
+        if(!req.user[0].authenticate(userUpdates.CurrentPassword)) {
+            res.status(400);
+            return res.send({success: false, error: req.i18n_texts.CurrentPasswordIsIncorrect});
+        }
+
+        if(userUpdates.Password !== userUpdates.ConfirmPassword) {
+            res.status(400);
+            return res.send({success: false, error: req.i18n_texts.PasswordNotEqualWithConfirmPassword});
+        }
         req.user[0].Salt = encryption.createSalt();
         req.user[0].HashPassword = encryption.hashPassword(req.user[0].Salt, userUpdates.Password);
     }
     req.user[0].save(function(err) {
-        if(err) { res.status(400); return res.send({ reason:err.toString() }); }
-        res.send(req.user[0]);
-    })
+        if(err) { res.status(400); return res.send({ success:false, error: err.toString() }); }
+        res.send({ success: true, data: req.user[0] });
+    });
 };
 
 exports.forgotPassword = function(req, res) {

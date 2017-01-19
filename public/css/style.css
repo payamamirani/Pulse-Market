@@ -3,7 +3,7 @@
   src: url("../fonts/GanjNamehSans-Regular.otf") format('otf'), url("../fonts/GanjNamehSans-Regular.woff") format('woff'), url("../fonts/GanjNamehSans-Regular.woff2") format('woff2'), url("../fonts/GanjNamehSans-Regular.ttf") format('truetype');
 }
 * {
-  font-family: 'GanjNamehSans', 'B Yekan', 'Arial', 'Tahoma', 'Time new Romance';
+  font-family: 'GanjNamehSans', 'B Yekan', 'Arial', 'Tahoma', 'Calibri';
 }
 a.dash-decoration {
   border-bottom: 1px dotted;
@@ -94,4 +94,18 @@ input[type="checkbox"] {
 }
 .non-float {
   float: none;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #31708f;
+  background-color: #d9edf7;
+  border: 1px dotted #bce8f1;
+}
+.sp-bottom-thumbnails.sp-has-pointer .sp-selected-thumbnail:before {
+  border-bottom: 5px solid #a96a00;
+}
+.sp-bottom-thumbnails.sp-has-pointer .sp-selected-thumbnail:after {
+  border-bottom: 13px solid #a96a00;
+  top: 1px;
 }

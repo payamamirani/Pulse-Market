@@ -3,7 +3,9 @@ define( [
 	"../event"
 ], function( jQuery ) {
 
-// Attach a bunch of functions for handling utilities AJAX events
+"use strict";
+
+// Attach a bunch of functions for handling common AJAX events
 jQuery.each( [
 	"ajaxStart",
 	"ajaxStop",

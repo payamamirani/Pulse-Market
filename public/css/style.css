@@ -109,3 +109,6 @@ input[type="checkbox"] {
   border-bottom: 13px solid #a96a00;
   top: 1px;
 }
+.sp-thumbnails-container {
+  direction: ltr;
+}

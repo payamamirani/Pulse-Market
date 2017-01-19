@@ -6,9 +6,16 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         arrows: true,
         buttons: false,
         imageScaleMode: 'exact',
-        waitForLayers: true,
         fade: true,
         autoScaleLayers: false,
-        thumbnailPointer: true
+        thumbnailPointer: true,
+        thumbnailWidth: 150,
+        thumbnailHeight: 100,
+        breakpoints: {
+            500: {
+                thumbnailWidth: 100,
+                thumbnailHeight: 80,
+            }
+        }
     });
 });

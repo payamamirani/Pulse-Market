@@ -12,9 +12,13 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         thumbnailWidth: 150,
         thumbnailHeight: 100,
         breakpoints: {
-            500: {
+            985: {
+                height: 350
+            },
+            760: {
                 thumbnailWidth: 100,
                 thumbnailHeight: 80,
+                height: 250
             }
         }
     });

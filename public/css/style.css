@@ -5,6 +5,9 @@
 * {
   font-family: 'GanjNamehSans', 'B Yekan', 'Arial', 'Tahoma', 'Calibri';
 }
+section.content {
+  min-height: 71.35%;
+}
 a.dash-decoration {
   border-bottom: 1px dotted;
 }
@@ -50,9 +53,12 @@ footer h6 {
 .navbar-form button {
   margin-left: 10px;
 }
-.btn {
-  margin-right: 8px;
+.btn-toggle {
+  margin-top: -2px;
   padding: 5px;
+}
+span.name {
+  margin-right: 15px;
 }
 .angular-ui-tree-handle {
   background: #f8faff;
@@ -77,9 +83,7 @@ tr.angular-ui-tree-empty {
   margin-bottom: 5px;
 }
 .tree-handle {
-  padding: 12px;
   margin: -1px;
-  margin-right: 5px;
   background: #428bca;
   color: #fff;
 }
@@ -114,8 +118,10 @@ input[type="checkbox"] {
   border-bottom: 5px solid #a96a00;
 }
 .sp-bottom-thumbnails.sp-has-pointer .sp-selected-thumbnail:after {
-  border-bottom: 13px solid #a96a00;
-  top: 1px;
+  border-bottom: 8px solid #a96a00;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 5px;
 }
 .sp-thumbnails-container {
   direction: ltr;
@@ -124,6 +130,10 @@ input[type="checkbox"] {
   border-top: 1px solid #ddd;
   margin-top: 5px;
   padding: 0;
+}
+.open > .dropdown-toggle > .caret {
+  border-top: none;
+  border-bottom: 4px dashed;
 }
 @media (min-width: 768px) {
   .category {

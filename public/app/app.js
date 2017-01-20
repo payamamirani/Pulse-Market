@@ -22,6 +22,11 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', { templateUrl: '/partials/main/main', controller: 'mvMainCtrl'})
+        .when('/admin/main', {templateUrl: '/partials/admin/main', resolve: routeRoleCheck.admin })
+        .when('/admin/users' , { templateUrl: '/partials/admin/users/user-list' , controller: 'mvUserListCtrl',
+            resolve: routeRoleCheck.admin })
+        .when('/admin/category', { templateUrl: '/partials/admin/category/category', controller: 'mvCategoryCtrl',
+            resolve: routeRoleCheck.admin })
         .when('/signup', { templateUrl: '/partials/account/signup', controller: 'mvSignupCtrl',
             resolve: routeRoleCheck.nouser })
         .when('/signin', { templateUrl: '/partials/account/signin', controller: 'mvLoginCtrl',
@@ -32,10 +37,6 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
             resolve: routeRoleCheck.nouser })
         .when('/changepassword', {templateUrl: '/partials/account/changepassword', controller: 'mvChangePasswordCtrl',
             resolve: routeRoleCheck.user })
-        .when('/admin/users' , { templateUrl: '/partials/admin/user-list' , controller: 'mvUserListCtrl',
-            resolve: routeRoleCheck.admin })
-        .when('/admin/category', { templateUrl: '/partials/admin/category/category', controller: 'mvCategoryCtrl',
-            resolve: routeRoleCheck.admin })
         .when('/profile', { templateUrl: '/partials/account/profile', controller: 'mvProfileCtrl',
             resolve: routeRoleCheck.user });
 });

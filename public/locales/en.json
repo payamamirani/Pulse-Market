@@ -53,5 +53,9 @@
   "CurrentPasswordIsIncorrect": "Current password is incorrect",
   "CopyRight": "All rights reserved 'Payam Amirani' and any copy of it is prohibited.",
   "AboutUs": "About us",
-  "ContactUs": "Contact us"
+  "ContactUs": "Contact us",
+  "AdminPanel": "Admin panel",
+  "Category": "Category",
+  "Users": "Users",
+  "Add": "Add"
 }

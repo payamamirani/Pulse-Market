@@ -15,64 +15,39 @@ function createDefaultCategories() {
     Category.findOne({}).exec(function(err, category) {
         if(err) console.log(err);
         if(!category) {
-            Category.create({Title: "Test 1", CreatedBy: "payam", Child:
-                [
-                    {
-                        Title: "Test 1.1", CreatedBy: "payam", Child:
-                        [
-                            {
-                                Title: "Test 1.1.1", CreatedBy: "payam", Child:
-                                [
-                                    {
-                                        Title: "Test 1.1.1.1", CreatedBy: "payam"
-                                    },
-                                    {
-                                        Title: "Test 1.1.1.2", CreatedBy: "payam"
-                                    },
-                                    {
-                                        Title: "Test 1.1.1.3", CreatedBy: "payam"
-                                    }
-                                ]
-                            },
-                            {
-                                Title: "Test 1.1.2", CreatedBy: "payam", Child:
-                                [
-                                    {
-                                        Title: "Test 1.1.2.1", CreatedBy: "payam"
-                                    },
-                                    {
-                                        Title: "Test 1.1.2.2", CreatedBy: "payam"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        Title: "Test 1.2", CreatedBy: "payam", Child:
-                        [
-                            {
-                                Title: "Test 1.2.1", CreatedBy: "payam", Child:
-                                [
-                                    {
-                                        Title: "Test 1.2.1.1", CreatedBy: "payam"
-                                    },
-                                    {
-                                        Title: "Test 1.2.1.2", CreatedBy: "payam"
-                                    }
-                                ]
-                            },
-                            {
-                                Title: "Test 1.2.2", CreatedBy: "payam", Child:
-                                [
-                                    {
-                                        Title: "Test 1.2.2.1", CreatedBy: "payam"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            });
+            Category.create(
+                {Title: "لاستیک", CreatedBy: "payam", Child:
+                    [
+                        {
+                            Title: "نمیدونم", CreatedBy: "payam"
+                        },
+                        {
+                            Title: "چی چی", CreatedBy: "payam"
+                        }
+                    ]
+                },
+                {
+                    Title:"موتور", CreatedBy: "payam", Child:
+                    [
+                        {
+                            Title: "ها", CreatedBy: "payam"
+                        },
+                        {
+                            Title: "نمنه", CreatedBy: "payam"
+                        },
+                        {
+                            Title: "یوخ بابا", CreatedBy: "payam"
+                        }
+                    ]
+                },
+                {
+                    Title:"بدنه", CreatedBy: "payam", Child:
+                    [
+                        {
+                            Title: "سبز", CreatedBy: "payam"
+                        }
+                    ]
+                });
         }
     });
 }

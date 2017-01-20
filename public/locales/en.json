@@ -50,5 +50,8 @@
   "SignOut": "Sign out",
   "Change": "Change",
   "CurrentPassword": "Current Password",
-  "CurrentPasswordIsIncorrect": "Current password is incorrect"
+  "CurrentPasswordIsIncorrect": "Current password is incorrect",
+  "CopyRight": "All rights reserved 'Payam Amirani' and any copy of it is prohibited.",
+  "AboutUs": "About us",
+  "ContactUs": "Contact us"
 }

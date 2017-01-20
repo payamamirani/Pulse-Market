@@ -50,5 +50,8 @@
   "SignOut": "خروج",
   "Change": "تغییر",
   "CurrentPassword": "کلمه عبور فعلی",
-  "CurrentPasswordIsIncorrect": "کلمه عبور فعلی اشتباه است."
+  "CurrentPasswordIsIncorrect": "کلمه عبور فعلی اشتباه است.",
+  "CopyRight": "کليه حقوق اين سايت متعلق به شرکت پیام امیرانی می‌باشد و هرگونه کپی برداری از آن پیگرد قانونی دارد.",
+  "AboutUs": "درباره ما",
+  "ContactUs": "تماس با ما"
 }

@@ -11,10 +11,19 @@ block main-content
                     h6= !!texts ? texts.AppDescription : "- Pulse Market"
             .navbar-collapse.collapse#myNavbar
                 div(ng-include="'/partials/account/navbar-login'")
+                .col-xs-12.category(ng-include="'/partials/main/navbar-category'")
 
     section.content
         .container(ng-view)
 
-    section
-        footer.container.text-center
-            p Copyright &copy; 2016 Parts Genuine
+    footer.container-fluid
+        .row.text-sm-right.text-xs-center
+            .col-xs-12
+                h4
+                    a(href="")= !!texts ? texts.AboutUs : "About Us"
+                    | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    a(href="")= !!texts ? texts.ContactUs : "Contact Us"
+            .col-xs-12.col-sm-8
+                h6= !!texts ? texts.CopyRight : "Copy Right"
+            .col-xs-12.col-sm-4.text-sm-left
+                h6 Copyright &copy; 2016 Pulse Market

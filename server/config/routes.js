@@ -6,7 +6,7 @@ var auth = require('./auth'),
 
 module.exports = function(app) {
 
-    app.get('/api/Categories', auth.requireRole('admin'), categoriesController.getAllCategories);
+    app.get('/api/Categories', categoriesController.getAllCategories);
     app.post('/api/Categories', auth.requireRole('admin'), categoriesController.createCategories);
     app.put('/api/Categories', auth.requireRole('admin'), categoriesController.updateCategories);
 

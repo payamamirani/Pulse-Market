@@ -1,21 +1,70 @@
+//
+    a.btn.btn-danger.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="DeleteChild(node)",
+    ng-if="!(node.Child && node.Child.length > 0)", title= !!texts ? texts.Delete : "Delete",
+    ng-class="{'margin-left': !(indexChild || node.Child && node.Child.length > 0)}")
+        span.glyphicon.glyphicon-minus
+
 script(type="text/ng-template", id="nodes_render.html")
     .tree-node
-        .pull-right.tree-handle(ui-tree-handle)
+        .pull-right.tree-handle(data-nodrag ,ui-tree-handle)
             span.glyphicon.glyphicon-list
         .tree-node-content
-            a.btn.btn-success.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="toggle(this)" ng-if="node.Child && node.Child.length > 0")
+            a.btn.btn-warning.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="toggle(this)",
+            ng-if="node.Child && node.Child.length > 0", title= !!texts ? texts.Collapse : "Collapse")
                 span.glyphicon(ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}")
-            span.name {{ node.Title }}
-    ol(ui-tree-nodes="", ng-model="node.Child", ng-class="{hidden: collapsed}")
-        li(ng-repeat="node in node.Child", ui-tree-node, ng-include="'nodes_render.html'")
+
+            a.btn.btn-success.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="AddChild(node)",
+            ng-if="!indexChild" title= !!texts ? texts.Add : "Add",
+            ng-class="{'margin-left': node.Child && node.Child.length > 0}")
+                span.glyphicon.glyphicon-plus
+
+            a.btn.btn-info.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="EditNode(node)",
+            title= !!texts ? texts.Edit : "Edit"
+            ng-class="{'margin-left': node.Child && node.Child.length > 0}")
+                span.glyphicon.glyphicon-edit
+
+            span.name {{ node.Title }} &nbsp; {{ss}}
+
+    ol(ui-tree-nodes ng-model="node.Child" ng-class="{hidden: collapsed}")
+        li(ng-repeat="(indexChild, node) in node.Child" ui-tree-node ng-include="'nodes_render.html'"
+        ng-init = "indexChild = 1")
 
 .row
     .col-xs-12
-        button.btn.btn-primary= !!texts ? texts.Add : "Add"
+        button.btn.btn-primary(ng-click="AddNew()")= !!texts ? texts.Add : "Add"
 br
 .row
     .col-xs-12
         .angular-ui-tree(ui-tree)
-            ol.angular-ui-tree-nodes#tree-root( ui-tree-nodes ng-model="categories")
-                li.angular-ui-tree-node(ng-repeat="node in categories" ui-tree-node
-                ng-include="'nodes_render.html'")
+            ol.angular-ui-tree-nodes#tree-root(ui-tree-nodes ng-model="categories")
+                li.angular-ui-tree-node(ng-repeat="node in categories" ui-tree-node ng-include="'nodes_render.html'"
+                collapsed="true")
+
+
+.modal.fade#AddCategory(role="AddCategory")
+    .modal-dialog.col-xs-12.col-sm-8.div-center
+        .modal-content
+            .modal-header
+                button.close(data-dismiss="modal") &times;
+                h4 {{ ModalTitle }}
+            .modal-body
+                .well.text-center
+                    form.form-horizontal(name="addCategoryForm")
+                        fieldset
+                            .form-group
+                                label.col-sm-3.control-label(for="name")
+                                    = (!!texts ? texts.CategoryName : "Category Name") + " : "
+                                .col-sm-9
+                                    input.form-control(name="name" type="text" ng-model="categoryName" required
+                                    placeholder= !!texts ? texts.CategoryName : "Category Name")
+                                    input(type="hidden" ng-model="parentId")
+                                    input(type="hidden" ng-model="Id")
+                                    input(type="hidden" ng-model="method")
+                            .form-group
+                                .col-xs-12.pull-left
+                                    button.btn.btn-primary(ng-click="SaveCategory()" ng-disabled="addCategoryForm.$invalid")
+                                        = !!texts ? texts.Save : "Save"
+                                    | &nbsp;
+                                    a.btn.btn-default(href="" data-toggle="modal" data-dismiss="modal")= !!texts ? texts.Cancel : "Cancel"
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal")= !!texts ? texts.Close : "Close"

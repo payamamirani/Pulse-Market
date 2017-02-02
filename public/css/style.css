@@ -57,6 +57,9 @@ footer h6 {
   margin-top: -2px;
   padding: 5px;
 }
+.btn-toggle.margin-left {
+  margin-left: 5px;
+}
 span.name {
   margin-right: 15px;
 }

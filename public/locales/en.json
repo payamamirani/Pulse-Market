@@ -57,5 +57,11 @@
   "AdminPanel": "Admin panel",
   "Category": "Category",
   "Users": "Users",
-  "Add": "Add"
+  "Add": "Add",
+  "Delete": "Delete",
+  "Edit": "Edit",
+  "Collapse": "Collapse",
+  "AddCategory": "Add Category",
+  "CategoryName":"Category name",
+  "Save": "Save"
 }

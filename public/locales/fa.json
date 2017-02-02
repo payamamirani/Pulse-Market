@@ -57,5 +57,13 @@
   "AdminPanel": "پنل ادمین",
   "Category": "دسته بندی",
   "Users": "کاربران",
-  "Add": "اضافه"
+  "Add": "اضافه",
+  "Delete": "حذف",
+  "Edit": "ویرایش",
+  "Collapse": "جمع کردن",
+  "AddCategory": "افزودن دسته بندی",
+  "AddChildCategory": "افزودن زیر شاخه دسته بندی",
+  "EditCategory": "ویرایش دسته بندی",
+  "CategoryName":"نام دسته بندی",
+  "Save": "ذخیره"
 }

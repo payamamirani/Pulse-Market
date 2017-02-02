@@ -1,3 +1,3 @@
-angular.module('app').controller('mvNavbarCategoryCtrl', function($scope, mvCategory) {
-    $scope.categories = mvCategory.query();
+angular.module('app').controller('mvNavbarCategoryCtrl', function($scope, mvCategoryObject) {
+    $scope.categories = mvCategoryObject;
 });

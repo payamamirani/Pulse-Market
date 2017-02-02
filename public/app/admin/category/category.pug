@@ -10,24 +10,21 @@ script(type="text/ng-template", id="nodes_render.html")
             span.glyphicon.glyphicon-list
         .tree-node-content
             a.btn.btn-warning.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="toggle(this)",
-            ng-if="node.Child && node.Child.length > 0", title= !!texts ? texts.Collapse : "Collapse")
+            ng-if="node.IsRoot", title= !!texts ? texts.Collapse : "Collapse")
                 span.glyphicon(ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}")
 
-            a.btn.btn-success.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="AddChild(node)",
-            ng-if="!indexChild" title= !!texts ? texts.Add : "Add",
-            ng-class="{'margin-left': node.Child && node.Child.length > 0}")
+            a.btn.btn-success.btn-xs.btn-small.pull-left.btn-toggle.margin-left(data-nodrag, ng-click="AddChild(node)",
+            ng-if="node.IsRoot" title= !!texts ? texts.Add : "Add")
                 span.glyphicon.glyphicon-plus
 
             a.btn.btn-info.btn-xs.btn-small.pull-left.btn-toggle(data-nodrag, ng-click="EditNode(node)",
-            title= !!texts ? texts.Edit : "Edit"
-            ng-class="{'margin-left': node.Child && node.Child.length > 0}")
+            title= !!texts ? texts.Edit : "Edit" ng-class="{'margin-left': node.IsRoot}")
                 span.glyphicon.glyphicon-edit
 
-            span.name {{ node.Title }} &nbsp; {{ss}}
+            span.name {{ node.Title }} &nbsp;
 
     ol(ui-tree-nodes ng-model="node.Child" ng-class="{hidden: collapsed}")
-        li(ng-repeat="(indexChild, node) in node.Child" ui-tree-node ng-include="'nodes_render.html'"
-        ng-init = "indexChild = 1")
+        li(ng-repeat="node in node.Child" ui-tree-node ng-include="'nodes_render.html'")
 
 .row
     .col-xs-12
@@ -37,7 +34,7 @@ br
     .col-xs-12
         .angular-ui-tree(ui-tree)
             ol.angular-ui-tree-nodes#tree-root(ui-tree-nodes ng-model="categories")
-                li.angular-ui-tree-node(ng-repeat="node in categories" ui-tree-node ng-include="'nodes_render.html'"
+                li.angular-ui-tree-node(ng-repeat="node in categories.categories" ui-tree-node ng-include="'nodes_render.html'"
                 collapsed="true")
 
 

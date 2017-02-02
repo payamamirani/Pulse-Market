@@ -1,5 +1,5 @@
-angular.module('app').controller('mvCategoryCtrl', function($scope, mvCategory, mvNotifier) {
-    $scope.categories = mvCategory.query();
+angular.module('app').controller('mvCategoryCtrl', function($scope, mvCategory, mvCategoryObject, mvNotifier) {
+    $scope.categories = mvCategoryObject;
     $scope.SaveCategory = function () {
         var categoryData = {
             Title: $scope.categoryName
@@ -19,14 +19,16 @@ angular.module('app').controller('mvCategoryCtrl', function($scope, mvCategory, 
         if ($scope.method !== "EditNode") {
             newCategory.$save().then(function () {
                 mvNotifier.successNotify(texts.SuccessAction, "");
-                $scope.categories = mvCategory.query();
+                mvCategoryObject.refresh();
+                $("#AddCategory").modal('hide');
             }, function (response) {
                 mvNotifier.errorNotify(texts.ErrorAction, response.data.reason);
             })
         } else {
             newCategory.$update().then(function () {
                 mvNotifier.successNotify(texts.SuccessAction, "");
-                $scope.categories = mvCategory.query();
+                mvCategoryObject.refresh();
+                $("#AddCategory").modal('hide');
             }, function (response) {
                 mvNotifier.errorNotify(texts.ErrorAction, response.data.reason);
             })
@@ -51,7 +53,7 @@ angular.module('app').controller('mvCategoryCtrl', function($scope, mvCategory, 
     };
     $scope.EditNode = function (category) {
         $("#AddCategory").modal('show');
-        $scope.parentId = "Edit Child";
+        $scope.parentId = !category.IsRoot ? "Edit Child" : null;
         $scope.Id = category._id;
         $scope.categoryName = category.Title;
         $scope.method = "EditNode";

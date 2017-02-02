@@ -11,6 +11,7 @@ exports.createCategories = function(req, res) {
     var categoryData = req.body;
     categoryData.CreatedBy = req.user[0].Username.toLowerCase();
     if(!categoryData.ParentId) {
+        categoryData.IsRoot = true;
         CategoriesModel.create(categoryData, function (err, category) {
             if (err) {
                 res.status(400);

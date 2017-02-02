@@ -6,6 +6,7 @@ var CategorySchema = new mongoose.Schema();
 CategorySchema.add({
     Title:{ type: String, required: requiredMsg },
     CreatedBy: { type: String, required: requiredMsg },
+    IsRoot: { type: Boolean, default: false },
     Child: [CategorySchema]
 });
 
@@ -16,7 +17,7 @@ function createDefaultCategories() {
         if(err) console.log(err);
         if(!category) {
             Category.create(
-                {Title: "لاستیک", CreatedBy: "payam", Child:
+                {Title: "لاستیک", IsRoot: true, CreatedBy: "payam", Child:
                     [
                         {
                             Title: "نمیدونم", CreatedBy: "payam"
@@ -27,7 +28,7 @@ function createDefaultCategories() {
                     ]
                 },
                 {
-                    Title:"موتور", CreatedBy: "payam", Child:
+                    Title:"موتور", IsRoot: true, CreatedBy: "payam", Child:
                     [
                         {
                             Title: "ها", CreatedBy: "payam"
@@ -41,7 +42,7 @@ function createDefaultCategories() {
                     ]
                 },
                 {
-                    Title:"بدنه", CreatedBy: "payam", Child:
+                    Title:"بدنه", IsRoot: true, CreatedBy: "payam", Child:
                     [
                         {
                             Title: "سبز", CreatedBy: "payam"

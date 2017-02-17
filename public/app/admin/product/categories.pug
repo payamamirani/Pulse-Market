@@ -1,0 +1,11 @@
+
+table.table.table-responsive.table-bordered.table-striped
+    tr(ng-repeat='cat in Categories')
+        th.bg-info.col-xs-3 {{ cat.Title }}
+        td.col-xs-9
+            table.col-xs-12
+                tr(ng-repeat='child in cat.Child')
+                    td
+                        .col-xs-1
+                            input.form-control(type="checkbox" data-value="{{child._id}}" ng-model="productCategories[child._id]")
+                        .col-xs-11.checkbox-text(ng-click="Check(child)") {{ child.Title }}

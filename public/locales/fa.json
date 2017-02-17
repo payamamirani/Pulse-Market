@@ -65,5 +65,13 @@
   "AddChildCategory": "افزودن زیر شاخه دسته بندی",
   "EditCategory": "ویرایش دسته بندی",
   "CategoryName":"نام دسته بندی",
-  "Save": "ذخیره"
+  "Save": "ذخیره",
+  "Product": "محصول",
+  "AddProduct": "اضافه کردن محصول",
+  "ProductName": "نام محصول",
+  "ProductDescription": "توضیحات محصول",
+  "Categories": "دسته ها",
+  "ProductCode": "کد محصول",
+  "ProductPrice": "قیمت محصول",
+  "UploadFileMessage": "برای آپلود عکس، آنرا به اینجا بکشید و رها کنید."
 }

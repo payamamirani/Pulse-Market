@@ -1,0 +1,82 @@
+
+.row
+    .col-xs-12
+        button.btn.btn-primary(ng-click="AddNew()")= !!texts ? texts.Add : "Add"
+
+br
+
+.row
+    .col-xs-12
+        table.table.table-striped.table-responsive.table-hover.table-bordered.text-center
+            thead.bg-info.hand-cursor
+                tr
+                    td
+                        b ID
+                    td
+                        b Name
+                    td
+                        b Description
+                    td
+                        b CreatedBy
+                    td
+                        b CreatedOn
+            tbody
+                tr(ng-repeat="product in Products")
+                    td {{product._id}}
+                    td {{product.Name}}
+                    td {{product.Description}}
+                    td {{product.CreatedBy}}
+                    td.ltr {{product.CreatedOn | date : "yyyy/MM/dd HH:mm:ss"}}
+
+.modal.fade#AddProduct(role="AddCategory")
+    .modal-dialog.col-xs-12.div-center
+        .modal-content
+            .modal-header
+                button.close(data-dismiss="modal") &times;
+                h4 {{ ModalTitle }}
+            .modal-body
+                .well.text-center
+                    .row
+                        form.form-horizontal.col-md-9(name="addProductForm")
+                            fieldset
+                                input(type="hidden" ng-model="Id")
+                                input(type="hidden" ng-model="method")
+                                .form-group
+                                    label.col-sm-3.col-md-2.control-label(for="name")
+                                        = (!!texts ? texts.ProductName : "Product Name") + " : "
+                                    .col-sm-9.col-md-10
+                                        input.form-control(name="name" type="text" ng-model="productName" required
+                                        placeholder= !!texts ? texts.ProductName : "Product Name")
+                                .form-group
+                                    label.col-sm-3.col-md-2.control-label(for="code")
+                                        = (!!texts ? texts.ProductCode : "Product Code") + " : "
+                                    .col-sm-9.col-md-10
+                                        input.form-control(name="name" type="text" ng-model="productCode" required
+                                        placeholder= !!texts ? texts.ProductCode : "Product Code")
+                                .form-group
+                                    label.col-sm-3.col-md-2.control-label(for="price")
+                                        = (!!texts ? texts.ProductPrice : "Product Price") + " : "
+                                    .col-sm-9.col-md-10
+                                        input.form-control(name="name" type="text" ng-model="productPrice" required
+                                        placeholder= !!texts ? texts.ProductPrice : "Product Price")
+                                .form-group
+                                    label.col-sm-3.col-md-2.control-label(for="description")
+                                        = (!!texts ? texts.ProductDescription : "Product Description") + " : "
+                                    .col-sm-9.col-md-10
+                                        textarea.form-control(name="name" ng-model="productDescription" required
+                                        placeholder= !!texts ? texts.ProductDescription : "Product Description")
+                                .form-group
+                                    label.col-sm-3.col-md-2.control-label(for="categories")
+                                        = (!!texts ? texts.Categories : "Categories") + " : "
+                                    .col-sm-9.col-md-10(ng-include="'/partials/admin/product/categories'")
+                                .form-group
+                                    .col-xs-12.pull-left
+                                        button.btn.btn-primary(ng-click="SaveProduct()" ng-disabled="addProductForm.$invalid")
+                                            = !!texts ? texts.Save : "Save"
+                                        | &nbsp;
+                                        a.btn.btn-default(href="" data-toggle="modal" data-dismiss="modal")= !!texts ? texts.Cancel : "Cancel"
+                        .col-md-3
+                            .dropzone.dz-clickable.needsclick#my-awesome-dropzone
+                                .dz-message.dz-clickable.needsclick= !!texts ? texts.UploadFileMessage : "Drop files here or click to upload."
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal")= !!texts ? texts.Close : "Close"

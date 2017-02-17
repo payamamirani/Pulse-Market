@@ -63,5 +63,13 @@
   "Collapse": "Collapse",
   "AddCategory": "Add Category",
   "CategoryName":"Category name",
-  "Save": "Save"
+  "Save": "Save",
+  "Product": "Product",
+  "AddProduct": "Add Product",
+  "ProductName": "Product Name",
+  "ProductDescription": "Product Description",
+  "Categories": "Categories",
+  "ProductCode": "Product Code",
+  "ProductPrice": "Product Price",
+  "UploadFileMessage": "Drop files here or click to upload."
 }

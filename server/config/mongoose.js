@@ -1,7 +1,8 @@
 
 var mongoose = require('mongoose'),
     UserModel = require('../models/User'),
-    CategoryModel = require('../models/Category');
+    CategoryModel = require('../models/Category'),
+    ProductModel = require('../models/Product');
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -12,4 +13,5 @@ module.exports = function(config) {
     });
     UserModel.createDefaultUsers();
     CategoryModel.createDefaultCategories();
+    ProductModel.createDefaultProducts();
 };

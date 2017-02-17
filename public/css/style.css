@@ -8,6 +8,19 @@
 section.content {
   min-height: 71.35%;
 }
+.ltr {
+  direction: ltr !important;
+}
+.rtl {
+  direction: rtl !important;
+}
+textarea {
+  min-height: 100px;
+  max-width: 100%;
+}
+.hand-cursor {
+  cursor: hand;
+}
 a.dash-decoration {
   border-bottom: 1px dotted;
 }
@@ -137,6 +150,27 @@ input[type="checkbox"] {
 .open > .dropdown-toggle > .caret {
   border-top: none;
   border-bottom: 4px dashed;
+}
+#my-awesome-dropzone {
+  border: 2px dashed #455e84;
+  border-radius: 5px;
+}
+.dropzone .dz-preview .dz-error-message:before {
+  content: '';
+  position: absolute;
+  top: 49px;
+  left: 64px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #be2626;
+}
+.dropzone .dz-preview .dz-error-message:after {
+  display: none;
+}
+.dropzone .dz-preview .dz-error-message {
+  top: -55px;
 }
 @media (min-width: 768px) {
   .category {

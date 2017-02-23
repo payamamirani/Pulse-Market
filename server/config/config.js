@@ -6,6 +6,7 @@ var publicPath = path.normalize(path.join(rootPath, 'public'));
 var viewPath = path.normalize(path.join(rootPath, 'server/views'));
 var localesPath = path.normalize(path.join(publicPath, 'locales'));
 var templatePath = path.normalize(path.join(publicPath, 'templateFile'));
+var siteImagePath = path.normalize(path.join(publicPath, 'siteImages'));
 
 module.exports = {
     development: {
@@ -14,6 +15,7 @@ module.exports = {
         viewPath: viewPath ,
         localesPath: localesPath,
         templatePath: templatePath,
+        siteImagePath: siteImagePath,
         db: "mongodb://localhost/PulseMarket" ,
         port: process.env.PORT || 3000
     },
@@ -23,6 +25,7 @@ module.exports = {
         viewPath: viewPath ,
         localesPath: localesPath,
         templatePath: templatePath,
+        siteImagePath: siteImagePath,
         db: "mongodb://appuser:multivision123@ds027145.mlab.com:27145/multivision" ,
         port: process.env.PORT || 8000
     }

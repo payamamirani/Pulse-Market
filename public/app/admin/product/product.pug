@@ -76,7 +76,8 @@ br
                                         | &nbsp;
                                         a.btn.btn-default(href="" data-toggle="modal" data-dismiss="modal")= !!texts ? texts.Cancel : "Cancel"
                         .col-md-3
-                            .dropzone.dz-clickable.needsclick#my-awesome-dropzone
-                                .dz-message.dz-clickable.needsclick= !!texts ? texts.UploadFileMessage : "Drop files here or click to upload."
+                            form(method="post").dropzone.dz-clickable.needsclick#my-awesome-dropzone
+                                .fallback.dz-message.dz-clickable.needsclick= !!texts ? texts.UploadFileMessage : "Drop files here or click to upload."
+                                    input#productId(type="hidden" name="productId" ng-model="productId")
             .modal-footer
                 button.btn.btn-default(data-dismiss="modal")= !!texts ? texts.Close : "Close"

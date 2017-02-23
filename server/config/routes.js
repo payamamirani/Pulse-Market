@@ -1,8 +1,10 @@
 
 var fs = require('fs'),
-    upload = require('multer')({ dest: '/tmp' }),
+    path = require('path'),
+    multer = require('multer'),
     auth = require('./auth'),
     captcha = require('./captcha'),
+    utilities = require('../utilities/utilities'),
     userController = require('../controllers/users'),
     categoriesController = require('../controllers/categories'),
     productsController = require('../controllers/products');
@@ -28,13 +30,23 @@ module.exports = function(app, config) {
         res.render('../../public/app/' + req.params[0]);
     });
 
+    var upload = multer(({ dest: config.templatePath }));
+
     app.post('/upload-file', upload.single('file'), function(req, res) {
         debugger;
         fs.readFile(req.file.path, function(err, data) {
             if(err) res.send(err);
-            fs.writeFile(config.templatePath, data, function(err) {
-                if(err) res.send(err);
-                res.redirect('back');
+            var filePath = path.normalize(path.join(config.siteImagePath, req.body.productId));
+            fs.exists(filePath, function(result) {
+                if(result)
+                    utilities.addFile(filePath, data, req, res);
+                else
+                    fs.mkdir(filePath, function(result) {
+                        if(!result)
+                            utilities.addFile(filePath, data, req, res);
+                        else
+                            res.send(err);
+                    });
             });
         });
     });

@@ -18,5 +18,6 @@ html
         include currentUser
         block main-content
         include scripts
-        .ajax-loader(loader)
-            img(src="/images/loading.gif")
+        .loading(loader)
+            .ajax-loader
+                img(src="/images/loading.gif")

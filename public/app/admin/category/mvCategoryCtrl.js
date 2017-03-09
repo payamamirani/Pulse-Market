@@ -28,7 +28,7 @@ angular.module('app').controller('mvCategoryCtrl', function($scope, mvCategory, 
             newCategory.$update().then(function () {
                 mvNotifier.successNotify(texts.SuccessAction, "");
                 mvCategoryObject.refresh();
-                $("#AddCategory").modal('hide');
+                $("#myPanel").modal('hide');
             }, function (response) {
                 mvNotifier.errorNotify(texts.ErrorAction, response.data.reason);
             })

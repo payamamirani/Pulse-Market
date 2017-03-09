@@ -11,7 +11,7 @@
             a(href="", data-toggle="modal", data-target="#myPanel")
                 | {{ identity.currentUser.FirstName + " " + identity.currentUser.LastName }}
 
-    .modal.fade#myPanel(role="profile", ng-if="identity.isAuthenticated()")
+    .modal.fade#myPanel(role="profile", ng-show="identity.isAuthenticated()")
         .modal-dialog.col-xs-12.col-sm-8.div-center
             .modal-content
                 .modal-header

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
     $("body").on('click','#myPanel #profile ul li', function() {
         $("#myPanel #profile ul li").removeClass('active');
         if(!$(this).hasClass('active'))
@@ -10,4 +10,4 @@ $(document).ready(function() {
         if(!$(this).hasClass('active'))
             $(this).addClass('active');
     });
-});
+});*/

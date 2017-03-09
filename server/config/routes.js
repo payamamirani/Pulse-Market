@@ -38,15 +38,9 @@ module.exports = function(app, config) {
             if(err) res.send(err);
             var filePath = path.normalize(path.join(config.siteImagePath, req.body.productId));
             fs.exists(filePath, function(result) {
-                if(result)
-                    utilities.addFile(filePath, data, req, res);
-                else
-                    fs.mkdir(filePath, function(result) {
-                        if(!result)
-                            utilities.addFile(filePath, data, req, res);
-                        else
-                            res.send(err);
-                    });
+                if(!result)
+                    fs.mkdirSync(filePath);
+                utilities.addFile(filePath, data, req, res);
             });
         });
     });

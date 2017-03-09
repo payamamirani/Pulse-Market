@@ -1,6 +1,7 @@
 angular.module('app', ['ngResource', 'ngRoute', 'ui.tree']);
 
-angular.module('app').config(function($routeProvider, $locationProvider) {
+angular.module('app').config(function($routeProvider, $locationProvider, $httpProvider) {
+    $httpProvider.interceptors.push('LoadingInterceptor');
     var routeRoleCheck = {
         admin: {
             auth: function (mvAuth) {
@@ -41,6 +42,17 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
             resolve: routeRoleCheck.user })
         .when('/profile', { templateUrl: '/partials/account/profile', controller: 'mvProfileCtrl',
             resolve: routeRoleCheck.user });
+});
+
+angular.module('app').directive('loader', function ($rootScope) {
+    return function($scope, element, attrs){
+        $scope.$on("loader_show", function() {
+            return element.show();
+        });
+        $scope.$on("loader_hide", function() {
+            return element.hide();
+        });
+    }
 });
 
 angular.module('app').run(function ($rootScope, $location) {

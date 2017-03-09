@@ -189,7 +189,6 @@ input[type="checkbox"] {
   z-index: 999;
 }
 .ajax-loader {
-  display: none;
   z-index: 9999;
   position: absolute;
   top: 49%;

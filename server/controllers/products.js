@@ -16,6 +16,7 @@ function TelegramBot(token, method, data, res) {
 }
 
 exports.test = function (req, res) {
+    console.log(req.body);
     var data = req.body;
     if(data.ok) {
         TelegramBot(token, 'sendMessage',

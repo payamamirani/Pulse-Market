@@ -4,7 +4,10 @@ var ProductsModel = require('mongoose').model('Product'),
     token = "348250619:AAF5YuCpO1KQACUunCn6TL0x1ebP0e0yuww";
 
 function TelegramBot(token, method, data, res) {
-    axios.post('https://api.telegram.org/bot' + token + '/' + method , data)
+    var url = 'https://api.telegram.org/bot' + token + '/' + method;
+    console.log(url);
+    console.log(data);
+    axios.post(url , data)
         .then(function (response) {
             console.log("OK" + response);
             res.end();

@@ -20,7 +20,7 @@ exports.test = function (req, res) {
     var data = req.body;
     if(data.ok) {
         TelegramBot(token, 'sendMessage',
-            {chat_id: data.chat.id, text: 'This is a test', reply_to_message_id: data.message.id}, res)
+            {chat_id: data.message.chat.id, text: 'This is a test', reply_to_message_id: data.message.message_id}, res)
     } else {
         return res.send({ok: false});
     }

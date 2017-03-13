@@ -21,12 +21,8 @@ function TelegramBot(token, method, data, res) {
 exports.test = function (req, res) {
     console.log(req.body);
     var data = req.body;
-    if(data.ok) {
         TelegramBot(token, 'sendMessage',
-            {chat_id: data.message.chat.id, text: 'This is a test', reply_to_message_id: data.message.message_id}, res)
-    } else {
-        return res.send({ok: false});
-    }
+            {chat_id: data.message.chat.id, text: 'This is a test', reply_to_message_id: data.message.message_id}, res);
 };
 
 exports.getAllProducts = function (req, res) {

@@ -1,29 +1,5 @@
 
-var ProductsModel = require('mongoose').model('Product'),
-    axios = require('axios'),
-    token = "348250619:AAF5YuCpO1KQACUunCn6TL0x1ebP0e0yuww";
-
-function TelegramBot(token, method, data, res) {
-    var url = 'https://api.telegram.org/bot' + token + '/' + method;
-    console.log(url);
-    console.log(data);
-    axios.post(url , data)
-        .then(function (response) {
-            console.log("OK" + response);
-            res.end();
-        })
-        .catch(function(err) {
-            console.error(err);
-            res.end(err);
-        });
-}
-
-exports.test = function (req, res) {
-    console.log(req.body);
-    var data = req.body;
-        TelegramBot(token, 'sendMessage',
-            {chat_id: data.message.chat.id, text: 'This is a test', reply_to_message_id: data.message.message_id}, res);
-};
+var ProductsModel = require('mongoose').model('Product');
 
 exports.getAllProducts = function (req, res) {
     ProductsModel.find({}).exec(function (err, collections) {

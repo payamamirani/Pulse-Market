@@ -11,8 +11,6 @@ var fs = require('fs'),
 
 module.exports = function(app, config) {
 
-    app.post('/api/348250619:AAF5YuCpO1KQACUunCn6TL0x1ebP0e0yuww/test', productsController.test);
-
     app.get('/api/Products', productsController.getAllProducts);
     app.post('/api/Products', auth.requireRole('admin'), productsController.createProduct);
     app.put('/api/Products', auth.requireRole('admin'), productsController.updateProduct);
@@ -23,7 +21,7 @@ module.exports = function(app, config) {
 
     app.get('/api/users', auth.requireRole('admin'), userController.getAllUsers);
     app.post('/api/users', userController.createUser);
-    app.put('/api/users', userController.updateUser);
+    app.put('/api/users', auth.requireApiLogin, userController.updateUser);
 
     app.post('/api/forgotPassword', userController.forgotPassword);
     app.post('/api/resetPassword', userController.resetPassword);

@@ -48,4 +48,8 @@ module.exports = function(app, config) {
         defaultLang: "fa"
     }));
     app.use(express.static(config.publicPath));
+    app.use(function(req, res, next) {
+        req.myConfig = config;
+        next();
+    });
 };

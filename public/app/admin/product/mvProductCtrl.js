@@ -1,26 +1,17 @@
-angular.module('app').controller('mvProductCtrl' , function ($scope, mvProduct, mvCategory, mvNotifier) {
+angular.module('app').controller('mvProductCtrl' , function ($scope, mvProduct, mvCategory, mvNotifier, Upload) {
     $scope.Products = mvProduct.query();
     $scope.Categories = mvCategory.query();
     $scope.productCategories = {};
-    $scope.myDropZone = {};
-
-    $("#my-awesome-dropzone").dropzone({
-        url: '/upload-file' ,
-        addRemoveLinks: true ,
-        autoProcessQueue: false ,
-        init: function () {
-            $scope.myDropZone = this;
-            $scope.myDropZone.on("sending", function(file, xhr, formData) {
-                formData.append("productId", $scope.productId);
-            });
-            $scope.myDropZone.on("complete", function(file) {
-                $scope.myDropZone.removeFile(file);
-            });
-        }
-    });
 
     $scope.Check = function (child) {
         $("input[type='checkbox'][data-value='" + child._id + "']").click();
+    };
+
+    $scope.orderByOrientation = true;
+    $scope.myOrderBy = "CreatedOn";
+    $scope.SortByMe = function (col) {
+        $scope.myOrderBy = col;
+        $scope.orderByOrientation = !$scope.orderByOrientation;
     };
 
     $scope.AddNew = function () {
@@ -28,6 +19,7 @@ angular.module('app').controller('mvProductCtrl' , function ($scope, mvProduct, 
         $scope.Id = $scope.productName = $scope.productCode = $scope.productPrice = $scope.productDescription = null;
         $scope.productCategories = {};
         $scope.method = "AddNew";
+        $scope.files = null;
         $scope.ModalTitle = texts.AddProduct;
     };
 
@@ -43,36 +35,36 @@ angular.module('app').controller('mvProductCtrl' , function ($scope, mvProduct, 
             if(value === true)
                 productData.Categories.push(index.toString());
         });
+
         switch ($scope.method) {
-            case "EditNew":
+            case "Edit":
                 productData.Id = $scope.Id;
                 break;
         }
 
-        var newProduct = new mvProduct(productData);
+        Upload.upload({
+            url: '/api/Products',
+            arrayKey: '',
+            data: { files: $scope.files, product: productData }
+        }).then(function(resp){
+            mvNotifier.successNotify(texts.SuccessAction, "");
+            $("#AddProduct").modal('hide');
+        }, function(resp){
+            mvNotifier.errorNotify(texts.ErrorAction, response.data.reason);
+        }, function(evt) {
+            //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
 
-        if ($scope.method !== "EditNew") {
-            newProduct.$save().then(function (productId) {
+        //var newProduct = new mvProduct(productData);
+
+        /*newProduct.$save().then(function () {
                 mvNotifier.successNotify(texts.SuccessAction, "");
-                UploadImage(productId);
                 $("#AddProduct").modal('hide');
-            }, function (response) {
+            },
+            function (response) {
                 mvNotifier.errorNotify(texts.ErrorAction, response.data.reason);
-            })
-        } else {
-            newProduct.$update().then(function (productId) {
-                mvNotifier.successNotify(texts.SuccessAction, "");
-                UploadImage(productId);
-                $("#AddProduct").modal('hide');
-            }, function (response) {
-                mvNotifier.errorNotify(texts.ErrorAction, response.data.reason);
-            })
-        }
+            }
+        );*/
     };
-
-    var UploadImage = function(productId) {
-        $scope.productId = productId;
-        $scope.myDropZone.processQueue();
-    };
-
 });

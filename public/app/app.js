@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ngRoute', 'ui.tree']);
+angular.module('app', ['ngResource', 'ngRoute', 'ui.tree', 'ngFileUpload']);
 
 angular.module('app').config(function($routeProvider, $locationProvider, $httpProvider) {
     $httpProvider.interceptors.push('LoadingInterceptor');

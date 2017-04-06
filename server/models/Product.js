@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose'),
-    jDate = require('jdate').JDate();
+    jDate = require('jdate');
 
 var requiredMsg = '{PATH} is required.';
 var ProductSchema = mongoose.Schema({
@@ -25,7 +25,7 @@ function createDefaultProducts() {
                 Description: 'This is a Test 1 Description',
                 Categories: ['5893a5245b812621c098a21c'],
                 CreatedBy: 'payam',
-                CreatedOn: jDate.toString('yyyy/MM/dd HH:mm:ss')
+                CreatedOn: jDate.JDate().toString('yyyy/MM/dd HH:mm:ss')
             });
             Product.create({
                 Name: 'Test 2',
@@ -34,7 +34,7 @@ function createDefaultProducts() {
                 Description: 'This is a Test 2 Description',
                 Categories: ['5893a5245b812621c098a220'],
                 CreatedBy: 'payam',
-                CreatedOn: jDate.toString('yyyy/MM/dd HH:mm:ss')
+                CreatedOn: jDate.JDate().toString('yyyy/MM/dd HH:mm:ss')
             });
             Product.create({
                 Name: 'Test 3',
@@ -43,7 +43,7 @@ function createDefaultProducts() {
                 Description: 'This is a Test 3 Description',
                 Categories: ['58a59804b3e41d2cb8c109a9'],
                 CreatedBy: 'payam',
-                CreatedOn: jDate.toString('yyyy/MM/dd HH:mm:ss')
+                CreatedOn: jDate.JDate().toString('yyyy/MM/dd HH:mm:ss')
             });
         }
     });
